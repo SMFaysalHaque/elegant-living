@@ -3,7 +3,7 @@ export const products = [
     id: 1,
     title: "Modern Velvet Sofa",
     subtitle: "3-Seater Contemporary Design",
-    price: 1299,
+    price: 45000,
     stock: 5,
     description:
       "Luxurious velvet upholstery meets contemporary design in this stunning 3-seater sofa. Featuring deep cushions, solid hardwood frame, and elegant brass legs. Perfect for modern living rooms seeking comfort and style.",
@@ -13,12 +13,13 @@ export const products = [
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&crop=center",
       "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&crop=center",
     ],
+    slug: "modern-velvet-sofa",
   },
   {
     id: 2,
     title: "Scandinavian Dining Table",
     subtitle: "Solid Oak Wood Construction",
-    price: 899,
+    price: 50000,
     stock: 3,
     description:
       "Handcrafted from premium solid oak, this dining table embodies Scandinavian minimalism. Seats 6 comfortably with its clean lines and natural wood grain. A timeless piece that will anchor your dining space for generations.",
@@ -28,12 +29,13 @@ export const products = [
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&crop=center",
       "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&crop=center",
     ],
+    slug: "scandinavian-dining-table",
   },
   {
     id: 3,
     title: "Luxury Leather Armchair",
     subtitle: "Italian Leather with Brass Details",
-    price: 799,
+    price: 10000,
     stock: 7,
     description:
       "Premium Italian leather meets expert craftsmanship in this sophisticated armchair. Features hand-finished brass details, supportive cushioning, and a swivel base. An investment piece that combines comfort with timeless elegance.",
@@ -49,7 +51,7 @@ export const products = [
     id: 4,
     title: "Industrial Coffee Table",
     subtitle: "Reclaimed Wood & Steel Frame",
-    price: 449,
+    price: 20000,
     stock: 2,
     description:
       "Urban industrial design meets rustic charm in this unique coffee table. Features reclaimed wood top with natural character marks and a powder-coated steel frame. Perfect for adding industrial flair to any modern living space.",
@@ -65,7 +67,7 @@ export const products = [
     id: 5,
     title: "Minimalist Bookshelf",
     subtitle: "5-Tier Floating Design",
-    price: 329,
+    price: 25000,
     stock: 10,
     description:
       "Clean lines and functional design define this stunning 5-tier bookshelf. Wall-mounted floating design maximizes floor space while providing ample storage. Crafted from sustainable bamboo with a smooth, natural finish.",
@@ -81,7 +83,7 @@ export const products = [
     id: 6,
     title: "Executive Office Chair",
     subtitle: "Ergonomic Mesh Back Design",
-    price: 599,
+    price: 5000,
     stock: 1,
     description:
       "Professional-grade ergonomic chair designed for all-day comfort. Features breathable mesh back, adjustable lumbar support, and premium cushioning. Height-adjustable with smooth-rolling casters for modern office environments.",
