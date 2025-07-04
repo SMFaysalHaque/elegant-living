@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { products } from "../data/data.js";
 
-const ShopDataContext = createContext(null);
+export const ShopDataContext = createContext(null);
 
 const store = {
   products,
