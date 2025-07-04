@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Import fonts */
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap"); /* Tangerine */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"); /* Inter */
+
+/* Set Inter as default font */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Utility class for Tangerine font */
+.font-tangerine {
+  font-family: "Tangerine", cursive;
+}
