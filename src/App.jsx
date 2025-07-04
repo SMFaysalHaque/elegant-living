@@ -6,25 +6,19 @@ import Product from "./pages/product";
 
 export default function App() {
   return (
-    <div className="">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
       <BrowserRouter>
-        <nav className="">
-          <div className="">
-            <Navbar />
-          </div>
+        <nav className="bg-white/90 backdrop-blur-sm border-b border-amber-100 sticky top-0 z-40">
+          <Navbar />
         </nav>
         <main className="">
-          <div className="">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/product/:slug" element={<Product />} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:slug" element={<Product />} />
+          </Routes>
         </main>
         <footer className="">
-          <div className="">
-            <Footer />
-          </div>
+          <Footer />
         </footer>
       </BrowserRouter>
     </div>
