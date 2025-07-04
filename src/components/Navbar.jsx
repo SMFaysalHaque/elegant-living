@@ -18,7 +18,7 @@ export default function Navbar() {
           </Link>
           <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-amber-800 h-9 rounded-md px-3 relative border-amber-200 text-amber-700 hover:bg-amber-50 cursor-pointer">
             <CartIcon />
-            <span class="absolute -top-2 -left-2 bg-amber-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-2 -left-2 bg-amber-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               4
             </span>
           </button>
