@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
 /* Import fonts */
-@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap"); /* Tangerine */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"); /* Inter */
+@font-face {
+  font-family: "Tangerine";
+  src: url("./assets/fonts/Tangerine-Regular.ttf") format("opentype");
+}
 
-/* Set Inter as default font */
-body {
-  font-family: "Inter", sans-serif;
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter_18pt-Regular.ttf") format("opentype");
 }
 
 /* Utility class for Tangerine font */
 .font-tangerine {
-  font-family: "Tangerine", cursive;
+  font-family: "Tangerine", sans-serif;
+}
+
+/* Set Inter as default font */
+body {
+  font-family: "Inter", sans-serif;
 }
