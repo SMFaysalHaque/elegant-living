@@ -12,8 +12,8 @@ export default function Cart({ onClose }) {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const handlePlaceOrder = () => {
-    setShowCheckout(false); // Close Checkout
-    setShowConfirm(true); // Open Confirm
+    setShowCheckout(false);
+    setShowConfirm(true);
   };
 
   return (
