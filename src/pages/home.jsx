@@ -7,11 +7,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-gray-800 mb-4">
-          Elegant Living
+      <div className="text-center xl:mb-20 mb-10">
+        <h1 className="lg:text-5xl text-3xl font-bold text-gray-800 xl:mb-10 mb-5">
+          Complements your Lifestyles
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="xl:text-xl text-lg text-gray-600 max-w-2xl mx-auto">
           Discover our curated collection of premium furniture designed to
           transform your space into a sanctuary of style and comfort.
         </p>
