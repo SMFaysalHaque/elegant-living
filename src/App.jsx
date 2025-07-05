@@ -11,13 +11,13 @@ export default function App() {
         <nav className="bg-white/90 backdrop-blur-sm border-b border-amber-100 sticky top-0 z-40">
           <Navbar />
         </nav>
-        <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto px-4 py-8 xl:mt-10 xl:mb-20 mb-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:slug" element={<Product />} />
           </Routes>
         </main>
-        <footer className="">
+        <footer className="bg-yellow-700">
           <Footer />
         </footer>
       </BrowserRouter>
