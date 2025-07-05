@@ -1,3 +1,6 @@
+import { useState } from "react";
+import CheckOutModal from "./modals/CheckOutModal";
+import ConfirmOrderModal from "./modals/ConfirmOrderModal";
 import CrossIcon from "./svgs/CrossIcon";
 import DeleteIcon from "./svgs/DeleteIcon";
 import MinusIcon from "./svgs/MinusIcon";
@@ -5,6 +8,14 @@ import PlusIcon from "./svgs/PlusIcon";
 import ShoppingIcon from "./svgs/ShoppinIcon";
 
 export default function Cart({ onClose }) {
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handlePlaceOrder = () => {
+    setShowCheckout(false); // Close Checkout
+    setShowConfirm(true); // Open Confirm
+  };
+
   return (
     <>
       <div className="fixed min-h-screen inset-0 bg-black/50 z-50 transition-opacity"></div>
@@ -69,12 +80,26 @@ export default function Cart({ onClose }) {
               <span>Total:</span>
               <span className="text-amber-600">$3,897</span>
             </div>
-            <button className="w-full h-12 text-lg bg-amber-600 hover:bg-amber-700 text-white rounded-md flex items-center justify-center gap-2 transition-colors">
+            <button
+              onClick={() => setShowCheckout(true)}
+              className="w-full h-12 text-lg bg-amber-600 hover:bg-amber-700 text-white rounded-md flex items-center justify-center gap-2 transition-colors"
+            >
               Proceed to Checkout
             </button>
           </div>
         </div>
       </div>
+
+      {showCheckout && (
+        <CheckOutModal
+          onClose={() => setShowCheckout(false)}
+          onPlaceOrder={handlePlaceOrder}
+        />
+      )}
+
+      {showConfirm && (
+        <ConfirmOrderModal onClose={() => setShowConfirm(false)} />
+      )}
     </>
   );
 }
