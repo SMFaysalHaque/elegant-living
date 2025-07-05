@@ -39,7 +39,6 @@ export default function ProductCard({ product }) {
         </div>
       </div>
 
-      {/* Product Info */}
       <div className="w-full flex flex-col justify-between">
         <div className="flex flex-col gap-2">
           <h3 className="text-xl font-bold text-gray-800">{product.title}</h3>
