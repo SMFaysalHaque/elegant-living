@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { ShopDataContext } from "../context/ShopContext";
 import Cart from "./Cart";
 import CartIcon from "./svgs/CartIcon";
 
 export default function Navbar() {
+  const { cartCount } = useContext(ShopDataContext);
   const [show, setShow] = useState(false);
   return (
     <>
@@ -26,7 +28,7 @@ export default function Navbar() {
             >
               <CartIcon />
               <span className="absolute -top-2 -left-2 bg-amber-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                4
+                {cartCount}
               </span>
             </button>
           </div>

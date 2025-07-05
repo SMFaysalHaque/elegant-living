@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShopDataContext } from "../context/ShopContext";
+import { useCommaFormatter } from "../hooks/useCommaFormatter";
 import CheckOutModal from "./modals/CheckOutModal";
 import ConfirmOrderModal from "./modals/ConfirmOrderModal";
 import CrossIcon from "./svgs/CrossIcon";
@@ -9,11 +11,26 @@ import ShoppingIcon from "./svgs/ShoppinIcon";
 
 export default function Cart({ onClose }) {
   const [showCheckout, setShowCheckout] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [confirmData, setConfirmData] = useState(null);
+  const {
+    cartList,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    cartCount,
+    cartTotal,
+    products,
+  } = useContext(ShopDataContext);
+  const { CommaFormatter } = useCommaFormatter();
 
-  const handlePlaceOrder = () => {
+  const handleOrderConfirm = (orderInfo) => {
     setShowCheckout(false);
-    setShowConfirm(true);
+    setConfirmData(orderInfo);
+  };
+
+  const handleContinueShopping = () => {
+    setConfirmData(null);
+    onClose();
   };
 
   return (
@@ -25,7 +42,7 @@ export default function Cart({ onClose }) {
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 flex items-center">
               <ShoppingIcon />
-              Shopping Cart (3)
+              Shopping Cart ({cartCount})
             </h2>
             <button
               onClick={onClose}
@@ -37,52 +54,74 @@ export default function Cart({ onClose }) {
 
           <div className="flex-1 overflow-y-auto p-6">
             <div className="space-y-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="flex items-start space-x-4">
-                  <img
-                    src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=600&h=600&fit=crop&crop=center"
-                    alt="Modern Velvet Sofa"
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
+              {cartList.map((item) => {
+                const product = products.find((p) => p.id === item.id);
+                const outOfStock = product?.stock === 0;
+                return (
+                  <div key={item.id} className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-start space-x-4">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-16 h-16"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-semibold">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.subtitle}</p>
+                        <p className="text-lg font-bold text-amber-600">
+                          {CommaFormatter(item.price)} ৳
+                        </p>
 
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-gray-800 truncate">
-                      Modern Velvet Sofa
-                    </h4>
-                    <p className="text-sm text-gray-600 truncate">
-                      3-Seater Contemporary Design
-                    </p>
-                    <p className="text-lg font-bold text-amber-600">$1,299</p>
+                        <div className="flex items-center justify-between mt-3">
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => decreaseQuantity(item.id)}
+                              className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer"
+                            >
+                              <MinusIcon />
+                            </button>
+                            <span className="w-8 text-center font-semibold">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => increaseQuantity(item.id)}
+                              disabled={outOfStock}
+                              className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer disabled:opacity-50"
+                            >
+                              <PlusIcon />
+                            </button>
+                          </div>
 
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center space-x-2">
-                        <button className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer">
-                          <MinusIcon />
-                        </button>
-                        <span className="w-8 text-center font-semibold">3</span>
-                        <button className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer">
-                          <PlusIcon />
-                        </button>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="h-9 px-3 rounded-md text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
+                          >
+                            <DeleteIcon />
+                          </button>
+                        </div>
                       </div>
-
-                      <button className="h-9 px-3 rounded-md text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer">
-                        <DeleteIcon />
-                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
 
           <div className="border-t border-gray-200 p-6 space-y-4">
             <div className="flex justify-between items-center text-xl font-bold">
               <span>Total:</span>
-              <span className="text-amber-600">$3,897</span>
+              <span className="text-amber-600">
+                {CommaFormatter(cartTotal)} ৳
+              </span>
             </div>
             <button
               onClick={() => setShowCheckout(true)}
-              className="w-full h-12 text-lg bg-amber-600 hover:bg-amber-700 text-white rounded-md flex items-center justify-center gap-2 transition-colors"
+              disabled={cartList.length === 0}
+              className={`w-full h-12 text-lg text-white rounded-md flex items-center justify-center gap-2 transition-colors ${
+                cartList.length === 0
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-amber-600 hover:bg-amber-700 cursor-pointer"
+              }`}
             >
               Proceed to Checkout
             </button>
@@ -93,12 +132,15 @@ export default function Cart({ onClose }) {
       {showCheckout && (
         <CheckOutModal
           onClose={() => setShowCheckout(false)}
-          onPlaceOrder={handlePlaceOrder}
+          onOrderConfirm={handleOrderConfirm}
         />
       )}
 
-      {showConfirm && (
-        <ConfirmOrderModal onClose={() => setShowConfirm(false)} />
+      {confirmData && (
+        <ConfirmOrderModal
+          onClose={handleContinueShopping}
+          info={confirmData}
+        />
       )}
     </>
   );

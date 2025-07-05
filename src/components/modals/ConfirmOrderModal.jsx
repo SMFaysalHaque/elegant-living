@@ -1,4 +1,4 @@
-export default function ConfirmOrderModal({ onClose }) {
+export default function ConfirmOrderModal({ onClose, info }) {
   return (
     <div className="fixed inset-0 min-h-screen bg-black/50 flex items-center justify-center z-[60] p-4">
       <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
@@ -21,13 +21,19 @@ export default function ConfirmOrderModal({ onClose }) {
             Order Confirmed!
           </h2>
           <p className="text-gray-600 mb-4">
-            Thank you for your purchase. We've sent a confirmation email with
-            your order details.
+            Thank you for your purchase, <b>{info.name}</b>.
           </p>
 
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <p className="text-sm text-gray-600">Order ID:</p>
-            <p className="font-mono font-bold text-gray-800">#1751717576097</p>
+          <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+            <p>
+              <b>Order ID:</b> {info.orderId}
+            </p>
+            <p>
+              <b>Email:</b> {info.email}
+            </p>
+            <p>
+              <b>Mobile:</b> {info.mobile}
+            </p>
           </div>
 
           <button
