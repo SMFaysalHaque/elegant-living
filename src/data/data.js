@@ -116,7 +116,7 @@ export const products = [
     title: "Open Shelf",
     subtitle: "Wall-Mounted 5-Tier Bamboo Shelf",
     price: 41350,
-    stock: 0,
+    stock: 6,
     description:
       "This floating open shelf offers a clean, space-saving solution for modern interiors. Crafted from eco-friendly bamboo, the 5-tier design is perfect for books, decor, and organizing essentials without compromising on style.",
     images: [
