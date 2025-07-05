@@ -27,7 +27,17 @@ export default function ShopDataProvider({ children }) {
     if (productIndex === -1 || products[productIndex].stock === 0) return;
 
     const inCart = cartList.find((item) => item.id === productId);
-    if (!inCart) {
+    if (inCart) {
+      // Increase quantity if already in cart
+      setCartList((prev) =>
+        prev.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      // Add new item to cart
       const newProduct = { ...products[productIndex] };
       setCartList([
         ...cartList,
@@ -40,8 +50,10 @@ export default function ShopDataProvider({ children }) {
           quantity: 1,
         },
       ]);
-      updateStock(productId, -1);
     }
+
+    // Decrease stock
+    updateStock(productId, -1);
   };
 
   const updateStock = (productId, delta) => {
@@ -92,7 +104,8 @@ export default function ShopDataProvider({ children }) {
     setCartList([]);
   };
 
-  const cartCount = cartList.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCount = cartList.length;
+
   const cartTotal = cartList.reduce(
     (sum, item) => sum + item.quantity * item.price,
     0
