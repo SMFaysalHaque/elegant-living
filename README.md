@@ -1,6 +1,6 @@
 # **_Elegant Living_**
 
-**_Live Website:_** [Elegant Living](https://elegant-living-furniture.netlify.app/)
+**_Live Website:_** [Elegant Living](https://elegant-living.vercel.app/)
 
 ## 🛠️ **(React+Tailwind+Js)**
 
