@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import StockBadge from "../components/StockBadge";
 import BackIcon from "../components/svgs/BackIcon";
 import { ShopDataContext } from "../context/ShopContext";
 import { useCommaFormatter } from "../hooks/useCommaFormatter";
@@ -8,7 +9,7 @@ export default function Products() {
   const { addToCart, products } = useContext(ShopDataContext);
   const { slug } = useParams();
   const product = products.find((item) => item.slug === slug);
-  const [selectedImage, setSelectedImage] = useState(product.images[0].url);
+  const [selectedImage, setSelectedImage] = useState(product?.images[0]?.url);
   const [added, setAdded] = useState(false);
   const { CommaFormatter } = useCommaFormatter();
 
@@ -24,6 +25,26 @@ export default function Products() {
     }, 2000);
   };
 
+  if (!product) {
+    return (
+      <div className="text-center py-20">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Product Not Found
+        </h1>
+        <p className="text-gray-600 mb-8 max-w-md mx-auto">
+          We couldn&apos;t find the product you&apos;re looking for. It may have
+          been removed or the link may be incorrect.
+        </p>
+        <Link to="/">
+          <span className="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium transition-colors">
+            <BackIcon />
+            Back to Products
+          </span>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <>
       <Link to="/">
@@ -36,27 +57,16 @@ export default function Products() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-4">
           <div className="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden relative">
-            <img src={selectedImage} className="w-full h-full object-cover" />
+            <img
+              src={selectedImage}
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
             <div className="absolute top-4 left-4">
-              <span
-                className={`bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold ${
-                  product.stock > 2
-                    ? "bg-green-500"
-                    : product.stock > 0 && product.stock < 3
-                    ? "bg-orange-500"
-                    : product.stock == 0
-                    ? "bg-red-500"
-                    : ""
-                }`}
-              >
-                {product.stock > 2
-                  ? `In Stock (${product.stock})`
-                  : product.stock > 0 && product.stock < 3
-                  ? `Only (${product.stock}) left`
-                  : product.stock === 0
-                  ? "Out of Stock"
-                  : ""}
-              </span>
+              <StockBadge
+                stock={product.stock}
+                className="px-4 py-2 text-sm font-semibold"
+              />
             </div>
           </div>
 

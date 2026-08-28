@@ -46,6 +46,7 @@ export default function Cart({ onClose }) {
             </h2>
             <button
               onClick={onClose}
+              aria-label="Close cart"
               className="h-9 px-3 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
             >
               <CrossIcon />
@@ -53,7 +54,18 @@ export default function Cart({ onClose }) {
           </div>
 
           <div className="flex-1 overflow-y-auto p-6">
-            <div className="space-y-4">
+            {cartList.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-center text-gray-500">
+                <ShoppingIcon />
+                <p className="mt-4 text-lg font-semibold text-gray-700">
+                  Your cart is empty
+                </p>
+                <p className="mt-1 text-sm text-gray-500">
+                  Browse our collection and add items to get started.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
               {cartList.map((item) => {
                 const product = products.find((p) => p.id === item.id);
                 const outOfStock = product?.stock === 0;
@@ -76,6 +88,7 @@ export default function Cart({ onClose }) {
                           <div className="flex items-center space-x-2">
                             <button
                               onClick={() => decreaseQuantity(item.id)}
+                              aria-label={`Decrease quantity of ${item.title}`}
                               className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer"
                             >
                               <MinusIcon />
@@ -86,6 +99,7 @@ export default function Cart({ onClose }) {
                             <button
                               onClick={() => increaseQuantity(item.id)}
                               disabled={outOfStock}
+                              aria-label={`Increase quantity of ${item.title}`}
                               className="w-8 h-8 rounded-md border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 flex items-center justify-center cursor-pointer disabled:opacity-50"
                             >
                               <PlusIcon />
@@ -94,6 +108,7 @@ export default function Cart({ onClose }) {
 
                           <button
                             onClick={() => removeFromCart(item.id)}
+                            aria-label={`Remove ${item.title} from cart`}
                             className="h-9 px-3 rounded-md text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
                           >
                             <DeleteIcon />
@@ -104,7 +119,8 @@ export default function Cart({ onClose }) {
                   </div>
                 );
               })}
-            </div>
+              </div>
+            )}
           </div>
 
           <div className="border-t border-gray-200 p-6 space-y-4">

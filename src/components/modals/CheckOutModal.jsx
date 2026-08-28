@@ -29,6 +29,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
           <h2 className="text-xl font-bold text-gray-800">Checkout</h2>
           <button
             onClick={onClose}
+            aria-label="Close checkout"
             className="h-9 px-3 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100"
           >
             ✕

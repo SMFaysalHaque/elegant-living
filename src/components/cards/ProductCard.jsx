@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCommaFormatter } from "../../hooks/useCommaFormatter";
+import StockBadge from "../StockBadge";
 import EyeIcon from "../svgs/EyeIcon";
 
 export default function ProductCard({ product }) {
@@ -13,29 +14,11 @@ export default function ProductCard({ product }) {
             product.images[0].url ||
             "https://via.placeholder.com/200?text=No+Image"
           }
-          alt="Modern Velvet Sofa"
+          alt={product.title}
           className="w-full h-full object-cover transition-all duration-300"
         />
         <div className="absolute top-3 left-3">
-          <span
-            className={`text-white px-2 py-1 rounded-full text-xs ${
-              product.stock > 2
-                ? "bg-green-500"
-                : product.stock > 0 && product.stock < 3
-                ? "bg-orange-500"
-                : product.stock == 0
-                ? "bg-red-500"
-                : ""
-            }`}
-          >
-            {product.stock > 2
-              ? `In Stock (${product.stock})`
-              : product.stock > 0 && product.stock < 3
-              ? `Only (${product.stock}) left`
-              : product.stock === 0
-              ? "Out of Stock"
-              : ""}
-          </span>
+          <StockBadge stock={product.stock} className="px-2 py-1 text-xs" />
         </div>
       </div>
 

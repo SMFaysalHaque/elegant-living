@@ -24,6 +24,7 @@ export default function Navbar() {
             </Link>
             <button
               onClick={() => setShow(true)}
+              aria-label={`Open cart (${cartCount} items)`}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-amber-800 h-9 rounded-md px-3 relative border-amber-200 text-amber-700 hover:bg-amber-50 cursor-pointer"
             >
               <CartIcon />
