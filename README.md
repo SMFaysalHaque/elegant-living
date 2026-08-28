@@ -31,7 +31,7 @@ There is no backend: the catalog is static seed data, cart and inventory state l
 - **Form validation** — `react-hook-form` in `onChange` mode with regex rules, inline error messages, and a submit button disabled until the form is valid.
 - **Unique order IDs** — generated with `uuid` on order confirmation.
 - **Dynamic routing** — React Router serves a catalog route and a slug-based product detail route.
-- **Reusable components** — shared product card, modals, an inline SVG icon set, and a number-formatting hook.
+- **Reusable components** — shared product card, modals, an inline SVG icon set, and a number-formatting utility.
 - **Responsive UI** — built with Tailwind CSS utility classes across breakpoints.
 
 ## Tech Stack
@@ -54,7 +54,8 @@ src/
 ├── index.css                # Tailwind import and fonts
 ├── context/ShopContext.jsx  # Global state: products, cart, stock
 ├── data/data.js             # Static catalog of 6 products
-├── hooks/                   # Number-formatting utility
+├── hooks/                   # Reusable React hooks (useFocusTrap)
+├── utils/                   # Number-formatting utility (formatNumber)
 ├── pages/                   # Home (catalog) and Product (detail)
 └── components/              # Navbar, Footer, Cart, cards, modals, SVG icons
 ```
