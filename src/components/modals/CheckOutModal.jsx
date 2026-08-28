@@ -1,11 +1,14 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { ShopDataContext } from "../../context/ShopContext";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { formatNumber } from "../../utils/formatNumber";
 
 export default function CheckOutModal({ onClose, onOrderConfirm }) {
   const { cartList, cartTotal, clearCart } = useContext(ShopDataContext);
+  const modalRef = useRef(null);
+  useFocusTrap(modalRef, onClose);
 
   const {
     register,
@@ -23,9 +26,17 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
 
   return (
     <div className="fixed min-h-screen inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkout-title"
+        className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+      >
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-800">Checkout</h2>
+          <h2 id="checkout-title" className="text-xl font-bold text-gray-800">
+            Checkout
+          </h2>
           <button
             onClick={onClose}
             aria-label="Close checkout"

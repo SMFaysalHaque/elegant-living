@@ -1,7 +1,19 @@
+import { useRef } from "react";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
+
 export default function ConfirmOrderModal({ onClose, info }) {
+  const modalRef = useRef(null);
+  useFocusTrap(modalRef, onClose);
+
   return (
     <div className="fixed inset-0 min-h-screen bg-black/50 flex items-center justify-center z-[60] p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title"
+        className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+      >
         <div className="p-8 text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +29,10 @@ export default function ConfirmOrderModal({ onClose, info }) {
             <path d="m9 11 3 3L22 4" />
           </svg>
 
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          <h2
+            id="confirm-title"
+            className="text-2xl font-bold text-gray-800 mb-2"
+          >
             Order Confirmed!
           </h2>
           <p className="text-gray-600 mb-4">

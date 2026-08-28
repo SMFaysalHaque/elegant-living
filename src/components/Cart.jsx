@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { useFocusTrap } from "../hooks/useFocusTrap";
 import { ShopDataContext } from "../context/ShopContext";
 import { formatNumber } from "../utils/formatNumber";
 import CheckOutModal from "./modals/CheckOutModal";
@@ -22,6 +23,9 @@ export default function Cart({ onClose }) {
     products,
   } = useContext(ShopDataContext);
 
+  const drawerRef = useRef(null);
+  useFocusTrap(drawerRef, onClose);
+
   const handleOrderConfirm = (orderInfo) => {
     setShowCheckout(false);
     setConfirmData(orderInfo);
@@ -36,10 +40,19 @@ export default function Cart({ onClose }) {
     <>
       <div className="fixed min-h-screen inset-0 bg-black/50 z-50 transition-opacity"></div>
 
-      <div className="fixed top-0 right-0 min-h-screen w-full max-w-md bg-white z-50 shadow-2xl transform transition-transform">
+      <div
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cart-title"
+        className="fixed top-0 right-0 min-h-screen w-full max-w-md bg-white z-50 shadow-2xl transform transition-transform"
+      >
         <div className="flex flex-col min-h-screen">
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-800 flex items-center">
+            <h2
+              id="cart-title"
+              className="text-xl font-bold text-gray-800 flex items-center"
+            >
               <ShoppingIcon />
               Shopping Cart ({cartCount})
             </h2>
