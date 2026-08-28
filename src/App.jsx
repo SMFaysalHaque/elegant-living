@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/home";
 import Product from "./pages/product";
@@ -17,6 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:slug" element={<Product />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <footer className="bg-yellow-700">

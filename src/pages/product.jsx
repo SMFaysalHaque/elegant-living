@@ -73,6 +73,7 @@ export default function Products() {
             {product.images.map((img, index) => (
               <button
                 key={index}
+                onClick={() => setSelectedImage(img.url)}
                 className={`aspect-square bg-white rounded-lg overflow-hidden transition-all cursor-pointer ${
                   selectedImage === img.url
                     ? "ring-2 ring-amber-500 shadow-md"
@@ -81,9 +82,8 @@ export default function Products() {
               >
                 <img
                   src={img.url}
-                  alt={img.name}
+                  alt={`${product.title} thumbnail ${index + 1}`}
                   loading="lazy"
-                  onClick={() => setSelectedImage(img.url)}
                   className="w-full h-full object-cover"
                 />
               </button>

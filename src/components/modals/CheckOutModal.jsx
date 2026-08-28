@@ -69,6 +69,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
                 Full Name
               </label>
               <input
+                id="name"
                 {...register("name", { required: true })}
                 placeholder="Full Name"
                 className="w-full h-10 rounded-md border border-gray-300 px-3 py-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -86,6 +87,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
                 Mobile Number
               </label>
               <input
+                id="mobile"
                 {...register("mobile", {
                   required: true,
                   pattern: /^[0-9]{11}$/,
@@ -102,12 +104,13 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
 
             <div>
               <label
-                htmlFor="address"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Email
               </label>
               <input
+                id="email"
                 {...register("email", {
                   required: true,
                   pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -128,6 +131,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
                 Delivery Address
               </label>
               <input
+                id="address"
                 {...register("address", { required: true })}
                 placeholder="Delivery Address"
                 className="w-full h-10 rounded-md border border-gray-300 px-3 py-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"

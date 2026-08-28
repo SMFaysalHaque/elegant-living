@@ -7,7 +7,7 @@ import CrossIcon from "./svgs/CrossIcon";
 import DeleteIcon from "./svgs/DeleteIcon";
 import MinusIcon from "./svgs/MinusIcon";
 import PlusIcon from "./svgs/PlusIcon";
-import ShoppingIcon from "./svgs/ShoppinIcon";
+import ShoppingIcon from "./svgs/ShoppingIcon";
 
 export default function Cart({ onClose }) {
   const [showCheckout, setShowCheckout] = useState(false);
