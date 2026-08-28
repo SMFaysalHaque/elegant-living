@@ -2,11 +2,10 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { ShopDataContext } from "../../context/ShopContext";
-import { useCommaFormatter } from "../../hooks/useCommaFormatter";
+import { formatNumber } from "../../utils/formatNumber";
 
 export default function CheckOutModal({ onClose, onOrderConfirm }) {
   const { cartList, cartTotal, clearCart } = useContext(ShopDataContext);
-  const { CommaFormatter } = useCommaFormatter();
 
   const {
     register,
@@ -46,7 +45,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
                     {item.title} × {item.quantity}
                   </span>
                   <span className="font-semibold">
-                    {CommaFormatter(item.quantity * item.price)} ৳
+                    {formatNumber(item.quantity * item.price)} ৳
                   </span>
                 </div>
               ))}
@@ -54,7 +53,7 @@ export default function CheckOutModal({ onClose, onOrderConfirm }) {
                 <div className="flex justify-between font-bold text-lg">
                   <span>Total:</span>
                   <span className="text-amber-600">
-                    {CommaFormatter(cartTotal)} ৳
+                    {formatNumber(cartTotal)} ৳
                   </span>
                 </div>
               </div>

@@ -1,20 +1,16 @@
 import { Link } from "react-router-dom";
-import { useCommaFormatter } from "../../hooks/useCommaFormatter";
+import { formatNumber } from "../../utils/formatNumber";
 import StockBadge from "../StockBadge";
 import EyeIcon from "../svgs/EyeIcon";
 
 export default function ProductCard({ product }) {
-  const { CommaFormatter } = useCommaFormatter();
-
   return (
     <div className="bg-white flex gap-3 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105 w-full h-[250px] p-5">
       <div className="relative w-full md:w-[200px] aspect-square bg-gray-100 rounded-lg overflow-hidden">
         <img
-          src={
-            product.images[0].url ||
-            "https://via.placeholder.com/200?text=No+Image"
-          }
+          src={product.images[0].url || "/assets/images/elegant-living-logo.png"}
           alt={product.title}
+          loading="lazy"
           className="w-full h-full object-cover transition-all duration-300"
         />
         <div className="absolute top-3 left-3">
@@ -27,7 +23,7 @@ export default function ProductCard({ product }) {
           <h3 className="text-xl font-bold text-gray-800">{product.title}</h3>
           <p className="text-gray-600 line-clamp-1">{product.subtitle}</p>
           <p className="text-2xl font-bold text-amber-600">
-            {CommaFormatter(product.price)} ৳
+            {formatNumber(product.price)} ৳
           </p>
         </div>
 

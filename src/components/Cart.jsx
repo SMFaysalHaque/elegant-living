@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ShopDataContext } from "../context/ShopContext";
-import { useCommaFormatter } from "../hooks/useCommaFormatter";
+import { formatNumber } from "../utils/formatNumber";
 import CheckOutModal from "./modals/CheckOutModal";
 import ConfirmOrderModal from "./modals/ConfirmOrderModal";
 import CrossIcon from "./svgs/CrossIcon";
@@ -21,7 +21,6 @@ export default function Cart({ onClose }) {
     cartTotal,
     products,
   } = useContext(ShopDataContext);
-  const { CommaFormatter } = useCommaFormatter();
 
   const handleOrderConfirm = (orderInfo) => {
     setShowCheckout(false);
@@ -75,13 +74,14 @@ export default function Cart({ onClose }) {
                       <img
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
                         className="w-16 h-16"
                       />
                       <div className="flex-1">
                         <h4 className="font-semibold">{item.title}</h4>
                         <p className="text-sm text-gray-600">{item.subtitle}</p>
                         <p className="text-lg font-bold text-amber-600">
-                          {CommaFormatter(item.price)} ৳
+                          {formatNumber(item.price)} ৳
                         </p>
 
                         <div className="flex items-center justify-between mt-3">
@@ -127,7 +127,7 @@ export default function Cart({ onClose }) {
             <div className="flex justify-between items-center text-xl font-bold">
               <span>Total:</span>
               <span className="text-amber-600">
-                {CommaFormatter(cartTotal)} ৳
+                {formatNumber(cartTotal)} ৳
               </span>
             </div>
             <button

@@ -44,6 +44,9 @@ export default function Footer() {
             <li className="text-sm leading-[100%] whitespace-nowrap">
               <a href="#">Instagram</a>
             </li>
+            <li className="text-sm leading-[100%] whitespace-nowrap">
+              <a href="#">LinkedIn</a>
+            </li>
           </ul>
         </div>
 
@@ -53,13 +56,13 @@ export default function Footer() {
           </h3>
           <ul className="flex flex-col lg:gap-7 gap-5">
             <li className="text-sm leading-[100%] whitespace-nowrap">
-              <a href="#">FAQ</a>
+              Premium Wooden Furniture
             </li>
             <li className="text-sm leading-[100%] whitespace-nowrap">
-              <a href="#">Authors</a>
+              Free Shipping over 50,000 ৳
             </li>
             <li className="text-sm leading-[100%] whitespace-nowrap">
-              <a href="#">Books</a>
+              30-Day Easy Returns
             </li>
           </ul>
         </div>
@@ -84,7 +87,12 @@ export default function Footer() {
             <li className="flex gap-5">
               {socialMediaImgs.map((img) => (
                 <div key={img.name}>
-                  <img src={img.url} alt={img.name} className="w-5 h-5" />
+                  <img
+                    src={img.url}
+                    alt={img.name}
+                    loading="lazy"
+                    className="w-5 h-5"
+                  />
                 </div>
               ))}
             </li>

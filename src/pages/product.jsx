@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import StockBadge from "../components/StockBadge";
 import BackIcon from "../components/svgs/BackIcon";
 import { ShopDataContext } from "../context/ShopContext";
-import { useCommaFormatter } from "../hooks/useCommaFormatter";
+import { formatNumber } from "../utils/formatNumber";
 
 export default function Products() {
   const { addToCart, products } = useContext(ShopDataContext);
@@ -11,7 +11,6 @@ export default function Products() {
   const product = products.find((item) => item.slug === slug);
   const [selectedImage, setSelectedImage] = useState(product?.images[0]?.url);
   const [added, setAdded] = useState(false);
-  const { CommaFormatter } = useCommaFormatter();
 
   const handleAddToCart = (productId) => {
     if (added) return; // prevent re-adding during "added" phase
@@ -83,6 +82,7 @@ export default function Products() {
                 <img
                   src={img.url}
                   alt={img.name}
+                  loading="lazy"
                   onClick={() => setSelectedImage(img.url)}
                   className="w-full h-full object-cover"
                 />
@@ -98,7 +98,7 @@ export default function Products() {
             </h1>
             <p className="text-xl text-gray-600 mb-4">{product.subtitle}</p>
             <p className="text-3xl font-bold text-amber-600">
-              {CommaFormatter(product.price)} ৳
+              {formatNumber(product.price)} ৳
             </p>
           </div>
 
