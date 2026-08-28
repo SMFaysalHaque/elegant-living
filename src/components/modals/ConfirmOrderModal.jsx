@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 
-export default function ConfirmOrderModal({ onClose, info }) {
+export default function ConfirmOrderModal({ onClose, info, inertTarget }) {
   const modalRef = useRef(null);
-  useFocusTrap(modalRef, onClose);
+  useFocusTrap(modalRef, onClose, inertTarget);
 
   return (
     <div className="fixed inset-0 min-h-screen bg-black/50 flex items-center justify-center z-[60] p-4">

@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { ShopDataContext } from "../context/ShopContext";
 import { formatNumber } from "../utils/formatNumber";
@@ -24,7 +25,10 @@ export default function Cart({ onClose }) {
   } = useContext(ShopDataContext);
 
   const drawerRef = useRef(null);
-  useFocusTrap(drawerRef, onClose);
+  // While the cart layer is open, mark the page (#root) inert so background
+  // content is hidden from keyboard and assistive tech. The cart layer itself is
+  // portaled to <body>, so it stays outside the inert subtree.
+  useFocusTrap(drawerRef, onClose, document.getElementById("root"));
 
   const handleOrderConfirm = (orderInfo) => {
     setShowCheckout(false);
@@ -36,7 +40,7 @@ export default function Cart({ onClose }) {
     onClose();
   };
 
-  return (
+  return createPortal(
     <>
       <div className="fixed min-h-screen inset-0 bg-black/50 z-50 transition-opacity"></div>
 
@@ -162,6 +166,7 @@ export default function Cart({ onClose }) {
         <CheckOutModal
           onClose={() => setShowCheckout(false)}
           onOrderConfirm={handleOrderConfirm}
+          inertTarget={drawerRef.current}
         />
       )}
 
@@ -169,8 +174,10 @@ export default function Cart({ onClose }) {
         <ConfirmOrderModal
           onClose={handleContinueShopping}
           info={confirmData}
+          inertTarget={drawerRef.current}
         />
       )}
-    </>
+    </>,
+    document.body
   );
 }

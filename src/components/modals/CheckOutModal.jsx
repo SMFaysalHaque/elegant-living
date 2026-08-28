@@ -5,10 +5,10 @@ import { ShopDataContext } from "../../context/ShopContext";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { formatNumber } from "../../utils/formatNumber";
 
-export default function CheckOutModal({ onClose, onOrderConfirm }) {
+export default function CheckOutModal({ onClose, onOrderConfirm, inertTarget }) {
   const { cartList, cartTotal, clearCart } = useContext(ShopDataContext);
   const modalRef = useRef(null);
-  useFocusTrap(modalRef, onClose);
+  useFocusTrap(modalRef, onClose, inertTarget);
 
   const {
     register,

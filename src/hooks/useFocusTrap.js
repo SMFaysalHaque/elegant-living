@@ -12,8 +12,13 @@ const FOCUSABLE_SELECTOR =
  *
  * The keydown listener is attached to the container element itself, so nested
  * sibling dialogs (rendered outside each other's DOM subtree) do not interfere.
+ *
+ * `backgroundToInert` (optional) is a DOM element marked `inert` while the dialog
+ * is active, hiding background/page content from keyboard and assistive tech. It
+ * is toggled inside this effect — after focus has moved into the dialog and
+ * before focus is restored — so it never blurs the captured trigger element.
  */
-export function useFocusTrap(containerRef, onEscape) {
+export function useFocusTrap(containerRef, onEscape, backgroundToInert = null) {
   const onEscapeRef = useRef(onEscape);
   onEscapeRef.current = onEscape;
 
@@ -33,6 +38,11 @@ export function useFocusTrap(containerRef, onEscape) {
     } else {
       container.setAttribute("tabindex", "-1");
       container.focus();
+    }
+
+    // Focus is now inside the dialog, so inerting the background cannot blur it.
+    if (backgroundToInert) {
+      backgroundToInert.setAttribute("inert", "");
     }
 
     const handleKeyDown = (event) => {
@@ -70,9 +80,13 @@ export function useFocusTrap(containerRef, onEscape) {
 
     return () => {
       container.removeEventListener("keydown", handleKeyDown);
+      // Remove inert before restoring focus so the trigger is focusable again.
+      if (backgroundToInert) {
+        backgroundToInert.removeAttribute("inert");
+      }
       if (previouslyFocused && typeof previouslyFocused.focus === "function") {
         previouslyFocused.focus();
       }
     };
-  }, [containerRef]);
+  }, [containerRef, backgroundToInert]);
 }
